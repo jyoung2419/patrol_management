@@ -29,37 +29,55 @@ class CustomHeader extends StatelessWidget {
       // padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          IconButton(
-            icon: isControllerScreen
-                ? const Icon(Icons.power_settings_new, color: Colors.white)
-                : const Icon(Icons.keyboard_arrow_left, color: Color(0xFF33CCC3), size: 30),
-            onPressed: () {
-              if (isControllerScreen) {
-                _showLogoutDialog(context);
-              } else {
+          if (isControllerScreen)
+            Row(
+              children: const [
+                SizedBox(width: 10),
+                Text(
+                  '스마트 순찰시스템',
+                  style: TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                    color: Color(0xFF213547),
+                  ),
+                ),
+              ],
+            )
+          else
+            IconButton(
+              icon: const Icon(Icons.keyboard_arrow_left, color: Color(0xFF33CCC3), size: 30),
+              onPressed: () {
                 if (onBack != null) {
                   onBack!();
                 } else {
                   Navigator.of(context).pop();
                 }
-              }
-            },
-          ),
+              },
+            ),
           if (!isControllerScreen && title != null)
             Expanded(
               child: Center(
                 child: Text(
                   title!,
                   style: const TextStyle(
-                    fontSize: 18,
+                    fontSize: 22,
                     color: Color(0xFF33CCC3),
                     fontWeight: FontWeight.bold,
                   ),
                 ),
               ),
-            ),
-          const SizedBox(width: 50),
+            )
+          else
+            const Spacer(),
+          if (isControllerScreen)
+            IconButton(
+              icon: const Icon(Icons.power_settings_new, color: Colors.white),
+              onPressed: () => _showLogoutDialog(context),
+            )
+          else
+            const SizedBox(width: 48),
         ],
       ),
     );

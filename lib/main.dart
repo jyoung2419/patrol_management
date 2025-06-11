@@ -7,13 +7,17 @@ import 'screens/patrol/controller_screen.dart';
 import 'screens/patrol/list_group_screen.dart';
 import 'screens/patrol/qr_screen.dart';
 import 'screens/patrol/patrol_result_screen.dart';
-import 'screens/patrol/patrol_history_screen.dart';
+import 'screens/history/patrol_history_screen.dart';
+import 'services/nfc_scan_service.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load(fileName: "assets/env/.env");
+  await NfcScanService.initialize();
   runApp(const MyApp());
 }
+
+final RouteObserver<PageRoute> routeObserver = RouteObserver<PageRoute>();
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -22,6 +26,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      navigatorObservers: [routeObserver],
       title: '스마트 순찰시스템',
       theme: ThemeData(fontFamily: "Pretendard"),
       initialRoute: '/login',

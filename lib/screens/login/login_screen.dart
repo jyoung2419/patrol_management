@@ -77,6 +77,7 @@ class _LoginScreenState extends State<LoginScreen> {
           final prefs = await SharedPreferences.getInstance();
           await prefs.setString('id', id);
           await prefs.setString('password', password);
+          await prefs.setString('name', name);
           _navigateToHome();
         } else {
           _showErrorDialog("서버에서 토큰 또는 이름을 반환하지 않았습니다.");
@@ -154,18 +155,18 @@ class _LoginScreenState extends State<LoginScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: const [
                         Text(
-                          "스마트 안전 관리 시스템",
+                          "순찰 관리 시스템",
                           style: TextStyle(
-                            fontSize: 28,
+                            fontSize: 34,
                             fontWeight: FontWeight.bold,
                             color: Colors.white,
                           ),
                         ),
-                        SizedBox(height: 5),
+                        SizedBox(height: 8),
                         Text(
                           "Nextcare Safety 3D technology",
                           style: TextStyle(
-                            fontSize: 14,
+                            fontSize: 20,
                             color: Colors.white,
                           ),
                         ),
@@ -202,12 +203,16 @@ class _LoginScreenState extends State<LoginScreen> {
                           decoration: InputDecoration(
                             hintText: "아이디를 입력하세요",
                             hintStyle: TextStyle(color: Colors.grey[400]),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(5),
-                              borderSide: const BorderSide(color: Colors.black54),
-                            ),
                             filled: true,
                             fillColor: Colors.white,
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(5),
+                              borderSide: BorderSide(color: Colors.grey),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(5),
+                              borderSide: BorderSide(color: Colors.grey),
+                            ),
                           ),
                         ),
                         const SizedBox(height: 15),
@@ -217,12 +222,16 @@ class _LoginScreenState extends State<LoginScreen> {
                           decoration: InputDecoration(
                             hintText: "비밀번호를 입력하세요",
                             hintStyle: TextStyle(color: Colors.grey[400]),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(5),
-                              borderSide: const BorderSide(color: Colors.black54),
-                            ),
                             filled: true,
                             fillColor: Colors.white,
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(5),
+                              borderSide: BorderSide(color: Colors.grey),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(5),
+                              borderSide: BorderSide(color: Colors.grey),
+                            ),
                           ),
                         ),
                       ],

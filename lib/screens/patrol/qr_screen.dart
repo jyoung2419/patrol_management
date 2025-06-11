@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:flutter/services.dart';
+import '../../main.dart';
 import '../../services/patrol_service.dart';
 
 class QRScreen extends StatefulWidget {
@@ -10,7 +11,7 @@ class QRScreen extends StatefulWidget {
   _QRScreenState createState() => _QRScreenState();
 }
 
-class _QRScreenState extends State<QRScreen> {
+class _QRScreenState extends State<QRScreen> with WidgetsBindingObserver, RouteAware {
   final MobileScannerController controller = MobileScannerController();
   bool flashOn = false;
   bool isScanned = false;
@@ -60,19 +61,34 @@ class _QRScreenState extends State<QRScreen> {
     });
   }
 
+
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addObserver(this);
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   }
 
   @override
   void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    routeObserver.unsubscribe(this);
     controller.dispose();
     SystemChrome.setPreferredOrientations(DeviceOrientation.values);
     super.dispose();
   }
 
+  @override
+  void didPopNext() {
+    controller.start();
+    setState(() => isScanned = false);
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    routeObserver.subscribe(this, ModalRoute.of(context)! as PageRoute);
+  }
 
   @override
   Widget build(BuildContext context) {

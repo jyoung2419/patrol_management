@@ -250,6 +250,15 @@ class PatrolService {
     return null;
   }
 
+  static Future<int?> getSpotIdFromUuid(String uuid) async {
+    final url = buildUri('/api/v1/spot/detail/spotId/$uuid');
+    final res = await http.get(url);
+    if (res.statusCode == 200) {
+      return int.tryParse(res.body);
+    }
+    return null;
+  }
+
   static Future<List<String>> getPatrolComments(int companyId) async {
     final url = buildUri('/api/v1/patrol/comment/company/$companyId');
     final res = await http.get(url);
