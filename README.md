@@ -1,16 +1,30 @@
 # patrol_management_app
 
-A new Flutter project.
+스마트 순찰 시스템
 
 ## Getting Started
+Flutter 3.7.0 기반으로 개발된 스마트 순찰 시스템입니다.
 
-This project is a starting point for a Flutter application.
+## 기능
+- NFC 기반 순찰 포인트 인식
+- QR 기반 순찰 포인트 인식
+- 실시간 카메라 / 사진 / 동영상 촬영
+- 순찰 결과 등록
+- 순찰 기록 조회
 
-A few resources to get you started if this is your first Flutter project:
+## 개발 환경
+Flutter 3.7.0
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+Android / iOS 지원
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+서버: Spring Boot + MariaDB
+
+## 빌드
+### Android
+
+```bash
+flutter build apk --release
+```
+
+## 기타
+개발/운영 서버 API 환경설정은 assets/env/.env 파일로 관리
